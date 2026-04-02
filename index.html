@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My youtube Account</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Interactive Polaroid Styles */
+        .photo-card {
+            transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.6s ease;
+            opacity: 0;
+            transform: scale(0.8) translateY(40px);
+            cursor: grab;
+            user-select: none;
+        }
+        
+        .photo-card.visible {
+            opacity: 1;
+        }
+
+        /* Hover effect to bring photo to front */
+        .photo-card:hover {
+            z-index: 100 !important;
+            transform: scale(1.1) rotate(0deg) !important;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .photo-card:active {
+            cursor: grabbing;
+            transform: scale(1.05) !important;
+        }
+
+        /* The Grid Background Decoration */
+        .grid-bg {
+            background-image: 
+                linear-gradient(to right, #80808012 1px, transparent 1px),
+                linear-gradient(to bottom, #80808012 1px, transparent 1px);
+            background-size: 40px 40px;
+            mask-image: radial-gradient(ellipse 60% 50% at 50% 0%, #000 70%, transparent 100%);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 overflow-x-hidden font-sans">
+
+    <section class="relative min-h-screen flex flex-col items-center pt-24 md:pt-32 px-4">
+        <div class="absolute inset-0 grid-bg -z-10 pointer-events-none"></div>
+
+        <div class="text-center mb-8">
+            <p class="text-[10px] md:text-xs uppercase tracking-[0.4em] text-slate-400 font-semibold mb-3">
+                This my you tube account and i will share my stories with you, so please subscribe to my channel and follow me on social media for more updates and behind-the-scenes content.
+            </p>
+            <h1 class="text-4xl md:text-7xl font-bold tracking-tight text-slate-800">
+                Welcome to My <span class="text-rose-500">YouTube Channel</span>
+            </h1>
+        </div>
+
+        <div id="gallery-container" class="relative w-full max-w-5xl h-[300px] md:h-[350px] flex items-center justify-center">
+            
+            <div class="photo-card absolute w-40 h-52 md:w-56 md:h-72 bg-white p-2 md:p-3 shadow-xl rounded-sm border border-slate-100" 
+                 style="--x: -320px; --y: 15px; --r: -4deg; z-index: 10;">
+                <img src="/hero.jpg" 
+                     class="w-full h-full object-cover rounded-sm pointer-events-none" alt="Story 1">
+            </div>
+
+            <div class="photo-card absolute w-40 h-52 md:w-56 md:h-72 bg-white p-2 md:p-3 shadow-xl rounded-sm border border-slate-100" 
+                 style="--x: -160px; --y: -10px; --r: 2deg; z-index: 20;">
+                <img src="2.jpg" 
+                     class="w-full h-full object-cover rounded-sm pointer-events-none" alt="Story 2">
+            </div>
+
+            <div class="photo-card absolute w-40 h-52 md:w-56 md:h-72 bg-white p-2 md:p-3 shadow-2xl rounded-sm border border-slate-100" 
+                 style="--x: 0px; --y: 20px; --r: -1deg; z-index: 50;">
+                <img src="3.jpg" 
+                     class="w-full h-full object-cover rounded-sm pointer-events-none" alt="Story 3">
+            </div>
+
+            <div class="photo-card absolute w-40 h-52 md:w-56 md:h-72 bg-white p-2 md:p-3 shadow-xl rounded-sm border border-slate-100" 
+                 style="--x: 160px; --y: -5px; --r: 3deg; z-index: 20;">
+                <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=500" 
+                     class="w-full h-full object-cover rounded-sm pointer-events-none" alt="Story 4">
+            </div>
+
+            <div class="photo-card absolute w-40 h-52 md:w-56 md:h-72 bg-white p-2 md:p-3 shadow-xl rounded-sm border border-slate-100" 
+                 style="--x: 320px; --y: 35px; --r: -2deg; z-index: 10;">
+                <img src="https://images.unsplash.com/photo-1519222970733-f546218fa6d7?auto=format&fit=crop&w=500" 
+                     class="w-full h-full object-cover rounded-sm pointer-events-none" alt="Story 5">
+            </div>
+        </div>
+
+        <div class="mt-8 z-50"><a href="https://studio.youtube.com/channel/UCeaYWXWen9CtTMf0kimpYIA">
+            <button class="group relative bg-slate-900 text-white px-10 py-4 rounded-full transition-all duration-300 hover:bg-slate-800 hover:shadow-2xl hover:-translate-y-1 active:scale-95 font-semibold text-sm tracking-wide">
+                Subscribe Now
+                <span class="inline-block ml-2 transition-transform group-hover:translate-x-1">→</span>
+            </button></a>
+        </div>
+               <div class="mt-8 z-50"><a href="portfolio.html">
+            <button class="group relative bg-slate-900 text-white px-10 py-4 rounded-full transition-all duration-300 hover:bg-slate-800 hover:shadow-2xl hover:-translate-y-1 active:scale-95 font-semibold text-sm tracking-wide">
+                Go portfolio
+                <span class="inline-block ml-2 transition-transform group-hover:translate-x-1">→</span>
+            </button>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.photo-card');
+            
+            // Function to handle the staggered entrance animation
+            const animateEntrance = () => {
+                const isMobile = window.innerWidth < 768;
+
+                cards.forEach((card, index) => {
+                    setTimeout(() => {
+                        const x = card.style.getPropertyValue('--x');
+                        const y = card.style.getPropertyValue('--y');
+                        const r = card.style.getPropertyValue('--r');
+                        
+                        // On mobile, we compress the horizontal (X) spread so they don't overflow
+                        const finalX = isMobile ? (parseFloat(x) / 4) + 'px' : x;
+                        const finalY = isMobile ? (parseFloat(y) / 2) + 'px' : y;
+                        
+                        card.style.transform = `translate(${finalX}, ${finalY}) rotate(${r})`;
+                        card.classList.add('visible');
+                    }, 400 + (index * 120)); // Delay based on index
+                });
+            };
+
+            // Run animation on load
+            animateEntrance();
+
+            // Optional: Re-calculate on window resize to keep it centered
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(animateEntrance, 250);
+            });
+        });
+    </script>
+</body>
+</html>
